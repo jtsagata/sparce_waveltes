@@ -1,5 +1,6 @@
 clearvars
 close all
+clc 
 
 load greasy.mat
 fs=abs(fft(s));
@@ -60,11 +61,19 @@ p = mfilename('fullpath');
 imageFile=fullfile(filepath,'../Results/',[name,'.png']);
 saveas(f,imageFile)
 
+
+% Check if our code gives same results as filterbank
+direction=0;
+s1=filterbank(s',1,Ho,direction);
+
+disp('This must be equal to zero')
+sum(s1-[c1 d1])
+
 function [c,d]= do_comp(signal,H)
     % H is the low pass filter
     
     % Compute the Hi pass filter
-    G = (-1).^(1:size(H,2)).*H;
+    G = -1 * (-1).^(1:size(H,2)).*H;
     
     % convert s to Nx1 vector
     signal = reshape(signal,1,[]);
