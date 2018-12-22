@@ -12,6 +12,8 @@ theshold_type='hard';
 final_title = 'Hibiscus Denoising Example';
 image_name = 'boat_hard_lvl1';
 
+% Define Daubechies filter
+Ho=[326/675 1095/1309 648/2891 -675/5216];
 
 % Load image
 f  = load_image(name);
@@ -31,8 +33,7 @@ subplot(2,2,4); imageplot(f0_r); title('blue');
 suptitle('Noise Lena and the RGB channels')
 
 
-% Define Daubechies filter
-Ho=[326/675 1095/1309 648/2891 -675/5216];
+
 
 % Do Wavelet composition
 wcR=fwt_or_2d(0,f0_r,level_d,Ho);

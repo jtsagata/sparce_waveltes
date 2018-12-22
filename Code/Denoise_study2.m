@@ -18,15 +18,15 @@ f  = rescale(crop(f,n));
 p = mfilename('fullpath');
 [filepath,name_fig1,ext]=fileparts(p);
 
-snr1=[];snr2=[];snr4=[];snr8=[];;snr16=[];
+snr1=[];snr2=[];snr4=[];snr8=[];snr16=[];
 for noise=0.1:0.1:1
     f0 = f + noise*randn(size(f));
     
-    [f_,theSNR1] = Denoising(f0,1,Ho, 'hard');
-    [f_,theSNR2] = Denoising(f0,2,Ho, 'hard');
-    [f_,theSNR4] = Denoising(f0,4,Ho, 'hard');
-    [f_,theSNR8] = Denoising(f0,8,Ho, 'hard');
-    [f_,theSNR16] = Denoising(f0,8,Ho, 'hard');
+    [~,theSNR1] = Denoising(f0,1,Ho, 'hard');
+    [~,theSNR2] = Denoising(f0,2,Ho, 'hard');
+    [~,theSNR4] = Denoising(f0,4,Ho, 'hard');
+    [~,theSNR8] = Denoising(f0,8,Ho, 'hard');
+    [~,theSNR16] = Denoising(f0,8,Ho, 'hard');
 
     
     snr1(end+1)= theSNR1;
@@ -44,7 +44,7 @@ plot(0.1:0.1:1, snr2, 'g', 'DisplayName','2 levels')
 plot(0.1:0.1:1, snr4, 'b', 'DisplayName','4 levels')
 plot(0.1:0.1:1, snr8, 'Color', [1 0 1], 'DisplayName','8 levels')
 plot(0.1:0.1:1, snr16, 'Color', [1 1 0], 'DisplayName','16 levels')
-xlabel(['Noise level']);
+xlabel('Noise level');
 ylabel('SNR');
 legend
 
