@@ -81,25 +81,47 @@ The Fourier transform gives the frequency components (spectral) exists in the si
 \subsection{Discrete Wavelet Transform}
 The discrete wavelet transform (DWT), provides sufficient information both for analysis and synthesis of the original signal, with a significant reduction in the computation time. The DWT is considerably easier to implement when compared to the Continuous Wavelet Transform (CWT). The main idea is the same as it is in the Continuous Wavelet Transform. A time-scale representation of a digital signal is obtained using digital filtering techniques. The CWT is a correlation between a wavelet at different scales and the signal with the scale (or the frequency) being used as a measure of similarity. The continuous wavelet transform is computed by changing the scale of the analysis window, shifting the window in time, multiplying by the signal, and integrating over all times. In the discrete case, filters of different cutoff frequencies are used to analyze the signal at different scales. The signal is passed through a series of high pass filters to analyze the high frequencies, and it is passed through a series of low pass filters to analyze the low frequencies. The resolution of the signal, which is a measure of the amount of detail information in the signal, is changed by the filtering operations, and the scale is changed by up sampling and down sampling operations. Down sampling a signal corresponds to reducing the sampling rate, or removing some of the samples of the signal. Up sampling a signal corresponds to increasing the sampling rate of a signal by adding new samples to the signal.
 
+\begin{figure}[t]
+        \centering
+        \includegraphics[width=8cm]{../Results/demo_1D_composition}
+        \caption{Wavelet Composition of 1D signal}
+		\label{fig:demo1}
+\end{figure}
+
 
 \subsection{Wavelet Analysis (Decomposition}
 The procedure starts with passing the signal through a half band digital low pass filter with impulse response. A half band low pass filter removes all frequencies that are above half of the highest frequency in the signal. For example, if a signal has a maximum of 500 Hz component, then half band low pass filtering removes all the frequencies above 250 Hz. After passing the signal through a half band low pass filter, half of the samples can be eliminated according to the Nyquist’s rule, since the signal now has a highest frequency of p/2 radians instead of p radians (if p is original highest frequency of signal). Simply discarding every other sample will down sample the signal by two, and the signal will then have half the number of points. The scale of the signal is now doubled. Here, the low pass filtering removes the high frequency information, but leaves the scale unchanged. Only the down sampling process changes the scale. The DWT analyzes the signal at different frequency bands with different resolutions by decomposing the signal into a coarse approximation and detail information. DWT employs two sets of functions, called scaling functions and wavelet functions, which are associated with low pass and high pass filters, respectively. 
+
+
+\begin{figure}[t]
+        \centering
+        \includegraphics[width=8cm]{../Results/demo_1D_deconposition.png}
+        \caption{Wavelet decomposition of 1D signal}
+		\label{fig:demo2}
+\end{figure}
 
 The decomposition of the signal into different frequency bands is simply obtained by successive high pass and low pass filtering of the time domain signal. The original signal x[n] is first passed through a half band high pass filter g[n] and a low pass filter h[n]. After the filtering, half of the samples can be eliminated. This constitutes one level of decomposition. This decomposition can be continued to multi level using the coarse approximation as input to next level.
 
 
 The decomposition process can be seen in a block diagram in Figure~\ref{fig:wave1}.
 
-\begin{figure}[]
+\begin{figure}[t]
         \centering
         \includegraphics[width=8cm]{diagram.png}
         \caption{Wavelet Decomposition of 1D signal}
 		\label{fig:wave1}
 \end{figure}
 
+In figure~\ref{fig:demo1} created by matlab script \texttt{demo\_1D\_composition.m} the ...
+
+
+
+
+
 
 \section{Wavelet Synthesis (Reconstruction)}
 The reconstruction of original signal from the wavelet coefficients is the reverse process of the decomposition. As we get the wavelet coefficients, we need to up sample the coefficients which halves the scale of the signal. After the signal is up sampled we apply low pass and high pass filters to the up sampled signal to get the perfect reconstructed signal.
+
 
 
 \section{2D DWT}
@@ -120,6 +142,29 @@ The data sets of many scientific experiments are corrupted with noise, either be
 The code this report as well as the results can be found in  github at \url{https://github.com/jtsagata/sparce_waveltes}.
 
 
+\begin{figure}[t]
+        \centering
+        \includegraphics[width=8cm]{../Results/leana_threshold.png}
+        \caption{Threshold functions and denoising results}
+		\label{fig:threshold}
+\end{figure}
+
+
+\begin{figure}[t]
+        \centering
+        \includegraphics[width=8cm]{../Results/noise_levels.png}
+        \caption{Effect of th}
+		\label{fig:noiselevel}
+\end{figure}
+
+
+\begin{figure}[t]
+        \centering
+        \includegraphics[width=8cm]{../Results/noise_levels_vs_d.png}
+        \caption{SNR from varius levels of wavelet analysis}
+		\label{fig:delevel}
+\end{figure}
+
 %\begin{figure}[b]
 %        \centering
 %        \includegraphics[width=8cm]{kernels.png}
@@ -129,8 +174,13 @@ The code this report as well as the results can be found in  github at \url{http
 
 
 
+\section{Matlab code}
+The file \texttt{getThreshold.m} calculates the theshold value for the threshold operations.
+\lstinputlisting[style=My-Matlab]{../Code/getThreshold.m}
 
-% The file \texttt{kernelMatrix.m} calculates a kernel of size $n\times{}m$.
-%\lstinputlisting[style=My-Matlab]{../Code/kernelMatrix.m}
+\vspace{18}
+\noindent The file \texttt{Denoising.m} performs denoising operation on an image.
+\lstinputlisting[style=My-Matlab]{../Code/Denoising.m}
+
 
 \end{document}
