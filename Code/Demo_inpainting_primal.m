@@ -12,10 +12,6 @@ Lambda = rand(n,n)>rho;
 Phi = @(f) f.*Lambda;
 y=Phi(f0);
 
-%figure; imageplot(y);
-
-% 4.3
-
 % Functors
 K = @(f) grad(f);
 KS = @(u) - div(u);
@@ -40,10 +36,9 @@ NumFrames=100;
 VideoResult = zeros(size(f,1),size(f,2),3,NumFrames);
 od3 = repmat({':'},1,ndims(VideoResult)-1);
 VideoResult(od3{:},1) = cat(3,f,f,f);
-%figure
-%subplot(4,4,1);
-%imageplot(f);
 
+TVEnergy=zeros(NumFrames,1);
+TVEnergy(1) =  F(K(f1));
 for ii=2:NumFrames
     % Iteration
     fold = f;
@@ -51,12 +46,12 @@ for ii=2:NumFrames
     f = ProxG(f-tau*KS(g), tau);
     f1 = f + theta * (f-fold);
     
-
+    TVEnergy(ii) = F(K(f1));    
     f= f1;
     VideoResult(od3{:},ii) = cat(3,f,f,f);
 end
 
-imageplot(f1)
+%imageplot(f1)
 
 movieFile='../Videos/lena_primal.avi';
 

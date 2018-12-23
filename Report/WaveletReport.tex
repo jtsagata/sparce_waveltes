@@ -136,10 +136,14 @@ For images, an algorithm similar to the one-dimensional case is possible for two
 
 
 \section {Denoising}
-The data sets of many scientific experiments are corrupted with noise, either because of the data acquisition process, or because of environmental effects. A first pre-processing step in analyzing such datasets is denoising, that is, estimating the unknown signal of interest from the available noisy data. There are several different approaches to denoise signals and images. Generally smoothing removes high frequency and retains low frequency (with blurring). De-blurring increases the sharpness signal features by boosting the high frequencies, whereas denoising tries to remove whatever noise is present regardless of the spectral content of a noisy signal. Wavelet transforms enable us to represent signals with a high degree of sparsity. This is the principle behind a non-linear wavelet based signal estimation technique known as wavelet denoising. Wavelet denoising attempts to remove the noise present in the signal while preserving the signal characteristics, regardless of its frequency content
+The data sets of many scientific experiments are corrupted with noise, either because of the data acquisition process, or because of environmental effects. A first pre-processing step in analyzing such datasets is denoising, that is, estimating the unknown signal of interest from the available noisy data. There are several different approaches to denoise signals and images. Generally smoothing removes high frequency and retains low frequency (with blurring). De-blurring increases the sharpness signal features by boosting the high frequencies, whereas denoising tries to remove whatever noise is present regardless of the spectral content of a noisy signal. Wavelet transforms enable us to represent signals with a high degree of sparsity. This is the principle behind a non-linear wavelet based signal estimation technique known as wavelet denoising. Wavelet denoising attempts to remove the noise present in the signal while preserving the signal characteristics, regardless of its frequency content.
 
 \section{Study of a Harr Wavelet Filter}
 The code this report as well as the results can be found in  github at \url{https://github.com/jtsagata/sparce_waveltes}.
+
+$$
+H_o(z) = \frac{1}{\sqrt{2}}\left( 1 + z^{-1}\right)
+$$
 
 
 \begin{figure}[t]
@@ -158,29 +162,52 @@ The code this report as well as the results can be found in  github at \url{http
 \end{figure}
 
 
+\section{Denoising}
 \begin{figure}[t]
         \centering
-        \includegraphics[width=8cm]{../Results/noise_levels_vs_d.png}
-        \caption{SNR from varius levels of wavelet analysis}
-		\label{fig:delevel}
+        \includegraphics{../Videos/lena_primal_frames.png}
+        \caption{Give me a name} 
+		\label{fig:denoise_video}
 \end{figure}
 
-%\begin{figure}[b]
-%        \centering
-%        \includegraphics[width=8cm]{kernels.png}
-%        \caption{Common kernels}
-%		\label{fig:kernel}
-%\end{figure}
 
+\section{Inpaining}
+\begin{figure}[t]
+        \centering
+        \includegraphics{../Results/Inpainting_pdual_flowers_evolution.png}
+        \includegraphics{../Results/Inpainting_pdual_lena_evolution.png}
+        \includegraphics{../Results/Inpainting_pdual_hibiscus_evolution.png}
+		\label{fig:evolve1}
+\end{figure}
+
+\begin{figure}[t]
+        \centering
+        \includegraphics{../Results/Inpainting_pdual_barb_evolution.png}
+        \includegraphics{../Results/Inpainting_pdual_boat_evolution.png}
+        \caption{Give me a name} 
+		\label{fig:evolve2}
+\end{figure}
+
+
+\begin{figure}[t]
+        \centering
+        \includegraphics{../Results/Inpainting_lena_noise_vs_SNR.png}
+        \caption{Give me a name} 
+		\label{fig:nvssnr}
+\end{figure}
 
 
 \section{Matlab code}
 The file \texttt{getThreshold.m} calculates the theshold value for the threshold operations.
 \lstinputlisting[style=My-Matlab]{../Code/getThreshold.m}
 
-\vspace{18}
+\vspace{18pt}
 \noindent The file \texttt{Denoising.m} performs denoising operation on an image.
 \lstinputlisting[style=My-Matlab]{../Code/Denoising.m}
+
+\vspace{18pt} 
+\noindent The file \texttt{ImpaintingPrimalDual.m} performs inpaining using regularization with primal-dual tone varation.
+\lstinputlisting[style=My-Matlab]{../Code/ImpaintingPrimalDual.m}
 
 
 \end{document}
