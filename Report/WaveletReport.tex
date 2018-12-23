@@ -3,6 +3,8 @@
 
 \usepackage{xltxtra}
 \usepackage{amsmath,amsthm,amssymb}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \usepackage[autostyle=true]{csquotes}
 \usepackage{polyglossia}
@@ -58,10 +60,10 @@
 \normalfont \normalsize 
 \textsc{University of Burgundy \\ 
 Image Analysis
-, MSCV 2018} \\
+, Vibot 2018} \\
 [10pt] 
 \rule{\linewidth}{0.5pt} \\[6pt] 
-\huge Sparse Visual Tracking \\
+\huge Wavelet-based Image Processing \\
 \rule{\linewidth}{2pt}  \\[10pt]
 }
 \author{Ioannis Tsagkatakis \\ Hassan Saeed}
@@ -162,7 +164,7 @@ For images, an algorithm similar to the one-dimensional case is possible for two
 \end{figure}
 
 
-\section {Denoising}
+\section{Denoising}
 The data sets of many scientific experiments are corrupted with noise, either because of the data acquisition process, or because of environmental effects. A first pre-processing step in analyzing such datasets is denoising, that is, estimating the unknown signal of interest from the available noisy data. There are several different approaches to denoise signals and images. Generally smoothing removes high frequency and retains low frequency (with blurring). De-blurring increases the sharpness signal features by boosting the high frequencies, whereas denoising tries to remove whatever noise is present regardless of the spectral content of a noisy signal. Wavelet transforms enable us to represent signals with a high degree of sparsity. This is the principle behind a non-linear wavelet based signal estimation technique known as wavelet denoising. Wavelet denoising attempts to remove the noise present in the signal while preserving the signal characteristics, regardless of its frequency content.
 
 \section{Study of a Harr Wavelet Filter}
@@ -172,6 +174,35 @@ $$
 H_o(z) = \frac{1}{\sqrt{2}}\left( 1 + z^{-1}\right)
 $$
 
+$$
+H_o(z) = \frac{326}{675} + \frac{1095}{1309}z^{-1} + \frac{648}{2891}z^{-2} - \frac{675}{5216}z^{-3}
+$$
+
+
+% Equations from 3.1
+$$
+\alpha^{\star} \in \argmin_{\alpha}\, \frac{1}{2}
+\left\|{}
+y-\Phi\Psi\alpha
+\right\|^{2} + \lambda{}J(\alpha)
+$$
+
+$$
+J(\alpha) = \sum_m
+\left\|{}
+\alpha_m
+\right\|
+$$
+
+% Equations from 3.2.2
+$$
+s_T(u) = \max\left( 0.1 - \frac{T}{|u|} \right) u
+$$
+
+
+$$
+S_t^{\Psi}(f) = \Psi \circ S_t \circ \Psi^{\star}
+$$
 
 \begin{figure}[t]
         \centering
