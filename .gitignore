@@ -1,3 +1,8 @@
+toolbox.zip
+toolbox/
+Hassan/
+/*.m
+/*.mat
 
 # Created by https://www.gitignore.io/api/latex,matlab
 # Edit at https://www.gitignore.io/?templates=latex,matlab
@@ -16,6 +21,7 @@
 *.cb
 *.cb2
 .*.lb
+*.swp
 
 ## Intermediate documents:
 *.dvi

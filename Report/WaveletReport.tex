@@ -117,8 +117,6 @@ In figure~\ref{fig:demo1} created by matlab script \texttt{demo\_1D\_composition
 
 
 
-
-
 \section{Wavelet Synthesis (Reconstruction)}
 The reconstruction of original signal from the wavelet coefficients is the reverse process of the decomposition. As we get the wavelet coefficients, we need to up sample the coefficients which halves the scale of the signal. After the signal is up sampled we apply low pass and high pass filters to the up sampled signal to get the perfect reconstructed signal.
 
@@ -127,13 +125,38 @@ The reconstruction of original signal from the wavelet coefficients is the rever
 \section{2D DWT}
 For images, an algorithm similar to the one-dimensional case is possible for two-dimensional wavelets. This kind of two-dimensional DWT leads to a decomposition of approximation coefficients at level $j$ in four components: the approximation at level $j+1$, and the details in three orientations (horizontal, vertical, and diagonal). The schematic diagram of 2D wavelet analysis (decomposition) is as shown in Figure~\ref{fig:wave2}.
 
-\begin{figure}[]
+\begin{figure}[tb]
         \centering
         \includegraphics[width=8cm]{diagram2.png}
         \caption{Schematic diagram of 2D DWT decomposition}
-		\label{fig:wave2}
+		\label{fig:wave1}
 \end{figure}
 
+\noindent The algorithm is simple
+\begin{enumerate}
+\item Apply $1D$ wavelet transform to each row
+\item Apply $1D$ wavelet transform to each column of the result
+\end{enumerate} 
+
+\noindent The components of a wavelets transform ... to directional edges of the image. This is demonstrated on Figure~\ref{fig:rubik} on page \pageref{fig:rubik}.
+
+\begin{figure}[bt]
+        \centering
+        \includegraphics[width=8cm]{explain2D.png}
+        \caption{2D Decompositionusing wavelets}
+		\label{fig:wave2}
+\end{figure}
+\noindent Figure~\ref{fig:wave2} outlines the process.
+
+
+\begin{figure}[tb]
+        \centering
+        \includegraphics[width=8cm]{../Results/Rubik_Ench.png}
+        \caption{Enchanced 2D to make edges more visible}
+		\label{fig:rubik}
+\end{figure}
+
+\FloatBarrier
 
 \section {Denoising}
 The data sets of many scientific experiments are corrupted with noise, either because of the data acquisition process, or because of environmental effects. A first pre-processing step in analyzing such datasets is denoising, that is, estimating the unknown signal of interest from the available noisy data. There are several different approaches to denoise signals and images. Generally smoothing removes high frequency and retains low frequency (with blurring). De-blurring increases the sharpness signal features by boosting the high frequencies, whereas denoising tries to remove whatever noise is present regardless of the spectral content of a noisy signal. Wavelet transforms enable us to represent signals with a high degree of sparsity. This is the principle behind a non-linear wavelet based signal estimation technique known as wavelet denoising. Wavelet denoising attempts to remove the noise present in the signal while preserving the signal characteristics, regardless of its frequency content.
@@ -154,7 +177,7 @@ $$
 \end{figure}
 
 
-\begin{figure}[t]
+\begin{figure}[t]   
         \centering
         \includegraphics[width=8cm]{../Results/noise_levels.png}
         \caption{Effect of th}
@@ -196,7 +219,7 @@ $$
 		\label{fig:nvssnr}
 \end{figure}
 
-
+\FloatBarrier
 \section{Matlab code}
 The file \texttt{getThreshold.m} calculates the theshold value for the threshold operations.
 \lstinputlisting[style=My-Matlab]{../Code/getThreshold.m}
